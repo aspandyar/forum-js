@@ -4,6 +4,10 @@ const statusCreated = 201;
 const statusOK = 200;
 const statusBadRequest = 400;
 
+const handleErrors = (err) => {
+    console.log(err.message, err.code);
+}
+
 // controller actions
 module.exports.signup_get = (req, res) => {
     res.render('signup');
@@ -22,7 +26,7 @@ module.exports.signup_post = async (req, res) => {
         res.status(statusCreated).json(user)
     }
     catch (err) {
-        console.log(err);
+        handleErrors(err);
         res.status(statusBadRequest).send('error, user not created');
     }
 }
