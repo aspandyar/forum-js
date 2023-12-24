@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>User</title>
+</head>
+<body>
+    <h1>User info: <%= username %></h1>
+
+    <% if(username.toLowerCase() == '1') { %>
+        <ul>
+            <% abouts.forEach((el) => { %>
+                <li><%= el %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    
+</body>
+</html>
