@@ -4,8 +4,22 @@ const statusCreated = 201;
 const statusOK = 200;
 const statusBadRequest = 400;
 
+// handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
+    let errors = { email: '', password: '' };
+
+    if (err.message.includes('user validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message;
+        });
+    }
+
+    if (err.code == 11000) {
+        errors.email = 'that email is already used'
+    }
+
+    return errors;
 }
 
 // controller actions
@@ -26,8 +40,8 @@ module.exports.signup_post = async (req, res) => {
         res.status(statusCreated).json(user)
     }
     catch (err) {
-        handleErrors(err);
-        res.status(statusBadRequest).send('error, user not created');
+        const errors = handleErrors(err);
+        res.status(statusBadRequest).json({ errors });
     }
 }
 

@@ -5,13 +5,13 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Please enter an email'],
-        unique: [true, 'Email should be unique'],
+        unique: true,
         lowercase: true,
         validate: [isEmail, 'Please enter a valid email']
     },
     password: {
         type: String,
-        required: [true, 'Please enter an email'],
+        required: [true, 'Please enter a password'],
         minLength: [8, 'Minimum password length should be 8 characters']
     },
 });
