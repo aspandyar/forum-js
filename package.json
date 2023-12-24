@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/aspandyar/forum-js/issues"
   },
-  "homepage": "https://github.com/aspandyar/forum-js#readme"
+  "homepage": "https://github.com/aspandyar/forum-js#readme",
+  "dependencies": {
+    "cowsay": "^1.5.0"
+  }
 }
