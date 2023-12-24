@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes');
 
 const PORT = 3000;
 
@@ -11,13 +12,15 @@ app.set('view engine', 'ejs');
 // middleware
 app.use(express.urlencoded({ extended: false })); // get data from form
 app.use(express.static('public'));
+app.use(express.json()); // way to send json data to auth
 
 // database and server connection
 const DBuri = "mongodb+srv://aspandyar:AkUE6zyIGRZjtWNg@cluster0.fsit9t7.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(DBuri)
-  .then((result) => app.listen(PORT))
-  .catch((err) => console.log(err));
+    .then((result) => app.listen(PORT))
+    .catch((err) => console.log(err))
+    .then(console.log("success"));
 
 
 // routes
@@ -29,15 +32,4 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.get('/user/:username', (req, res) => {
-    let data = { username: req.params.username, abouts: ['Football', 'Basketball', 'Vollewbal'] };
-    res.render('user', data);
-});
-
-app.post('/check-user', (req, res) => {
-    let username = req.body.username;
-    if (username == "")
-        return res.redirect('/');
-    else
-        return res.redirect('/user/' + username);
-});
+app.use(authRoutes);
