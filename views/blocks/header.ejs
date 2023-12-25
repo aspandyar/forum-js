@@ -7,9 +7,12 @@
                 <a href="/about">about</a>
             </div>
             <div class="right">
+                <% if (user) { %>
+                <a href="/user/logout">logout</a>
+                <% } else { %>
                 <a href="/user/signup">signup</a>
                 <a href="/user/login">login</a>
-                <a href="/user/logout">logout</a>
+                <% } %>
             </div>
         </div>
     </nav>
