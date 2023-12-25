@@ -5,6 +5,15 @@
 
 <body>
     <%- include('blocks/header.ejs') -%>
-    <p>Sign up page</p>
+    <form>
+        <h2>Sign up</h2>
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+        <div class="email-error"></div>
+        <label for="password">Password</label>
+        <input type="password" name="password" required>
+        <div class="password-error"></div>
+        <button>Sign up</button>
+    </form>
 </body>
 </html>
