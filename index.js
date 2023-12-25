@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes');
-const { requireAuth } = require('./middleware/authMidleware');
+const { requireAuth, checkUser } = require('./middleware/authMidleware');
 
 const PORT = 3000;
 
@@ -27,6 +27,8 @@ mongoose.connect(DBuri)
 
 
 // routes
+app.get('*', checkUser); // to all path
+
 app.get('/', (req, res) => {
     res.render('index');
 });

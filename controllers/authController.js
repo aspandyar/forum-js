@@ -84,4 +84,9 @@ module.exports.login_post = async (req, res) => {
         const errors = handleErrors(err);
         res.status(statusBadRequest).json({ errors });
     }
-}
+};
+
+module.exports.logout_get = (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/');
+};
