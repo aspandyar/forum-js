@@ -6,7 +6,7 @@ const passwordError = document.querySelector('.password-error');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // refresh email, and password
+    // refresh email, and password error
     emailError.textContent = '';
     passwordError.textContent = '';
 
@@ -15,7 +15,7 @@ form.addEventListener('submit', async (e) => {
     const password = form.password.value;
 
     try {
-        const res = await fetch('/user/signup', {
+        const res = await fetch('/user/login', {
             method: 'POST', 
             body: JSON.stringify({ email, password }),
             headers: {'Content-Type': 'application/json'}

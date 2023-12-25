@@ -61,6 +61,13 @@ module.exports.signup_post = async (req, res) => {
 module.exports.login_post = async (req, res) => {
     const { email, password } = req.body;
 
+    try {
+        const user = await User.login(email, password);
 
-    res.send('user login');
+        res.status(statusOK).json({user: user._id});
+    }
+    catch (err) {
+        const errors = handleErrors(err);
+        res.status(statusBadRequest).json({errors});
+    }
 }

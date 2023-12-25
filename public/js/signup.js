@@ -6,7 +6,7 @@ const passwordError = document.querySelector('.password-error');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // refresh email, and password
+    // refresh email, and password error
     emailError.textContent = '';
     passwordError.textContent = '';
 
