@@ -5,6 +5,17 @@
 
 <body>
     <%- include('blocks/header.ejs') -%>
-    <p>Login page</p>
+    <form>
+        <h2>Log in</h2>
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+        <div class="email-error"></div>
+        <label for="password">Password</label>
+        <input type="password" name="password" required>
+        <div class="password-error"></div>
+        <button>Log in</button>
+    </form>
+
+    <script src="js/index.js"></script>
 </body>
 </html>
