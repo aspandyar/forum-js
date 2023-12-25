@@ -126,3 +126,12 @@ button:active {
     transform: translateY(4px);
 }
 
+.email-error {
+    color: rgb(233, 50, 50);
+    margin: 10px;   
+}
+
+.password-error {
+    color: rgb(233, 50, 50);
+    margin: 10px;   
+}
