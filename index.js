@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes');
+const { requireAuth } = require('./middleware/authMidleware');
 
 const PORT = 3000;
 
@@ -30,7 +31,7 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/about', (req, res) => {
+app.get('/about', requireAuth, (req, res) => {
     res.render('about');
 });
 

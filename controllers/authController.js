@@ -11,14 +11,25 @@ const handleErrors = (err) => {
     console.log(err.message, err.code);
     let errors = { email: '', password: '' };
 
-    if (err.message.includes('user validation failed')) {
-        Object.values(err.errors).forEach(({ properties }) => {
-            errors[properties.path] = properties.message;
-        });
+    // incorrect email
+    if (err.message == 'incorrect email') {
+        errors.email = 'that email is not registered yet';
+    }
+
+    if (err.message == 'incorrect password') {
+        errors.password = 'that password is incorrect';
     }
 
     if (err.code == 11000) {
         errors.email = 'that email is already used'
+        return errors;
+    }
+
+
+    if (err.message.includes('user validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message;
+        });
     }
 
     return errors;
@@ -27,7 +38,7 @@ const handleErrors = (err) => {
 const maxAge = 30 * 60; // 30 minuts
 
 const createToken = (id) => {
-    return jwt.sign({id}, 'aspandyarTempSecretOrPrivateKey', {
+    return jwt.sign({ id }, 'aspandyarTempSecretOrPrivateKey', {
         expiresIn: maxAge
     });
 }
@@ -48,9 +59,9 @@ module.exports.signup_post = async (req, res) => {
         const user = await User.create({ email, password });
 
         const token = createToken(user._id);
-        res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
 
-        res.status(statusCreated).json({user: user._id});
+        res.status(statusCreated).json({ user: user._id });
     }
     catch (err) {
         const errors = handleErrors(err);
@@ -64,10 +75,13 @@ module.exports.login_post = async (req, res) => {
     try {
         const user = await User.login(email, password);
 
-        res.status(statusOK).json({user: user._id});
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+
+        res.status(statusOK).json({ user: user._id });
     }
     catch (err) {
         const errors = handleErrors(err);
-        res.status(statusBadRequest).json({errors});
+        res.status(statusBadRequest).json({ errors });
     }
 }

@@ -128,10 +128,23 @@ button:active {
 
 .email-error {
     color: rgb(233, 50, 50);
-    margin: 10px;   
+    margin: 10px;
 }
 
 .password-error {
     color: rgb(233, 50, 50);
-    margin: 10px;   
+    margin: 10px;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+footer {
+    text-align: center;
+    color: #4d4a4a;
 }
