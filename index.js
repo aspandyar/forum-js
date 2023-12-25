@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes');
 
 const PORT = 3000;
@@ -13,12 +14,13 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false })); // get data from form
 app.use(express.static('public'));
 app.use(express.json()); // way to send json data to auth
+app.use(cookieParser()); // set cookie in miidleware
 
 // database and server connection
 const DBuri = "mongodb+srv://aspandyar:AkUE6zyIGRZjtWNg@cluster0.fsit9t7.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(DBuri)
-    .then((result) => app.listen(PORT))
+    .then(() => app.listen(PORT))
     .catch((err) => console.log(err))
     .then(console.log("success"));
 
